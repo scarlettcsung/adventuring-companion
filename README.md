@@ -1,1 +1,1 @@
-# tabletop-assistant
+# Digital Hireling
