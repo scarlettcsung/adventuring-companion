@@ -1,6 +1,8 @@
+# imports
 import random
 from typing import Literal
 
+# functions
 def roll(number:int = 1, die:int = 20, roll_type: Literal[-1,0,1] = 0):
     """
     Dice roller
