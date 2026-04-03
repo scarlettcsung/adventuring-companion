@@ -1,8 +1,7 @@
 """
-Describes ability scores and maps saves and skills to ability scores. Contains functions calculating proficiency bonuses and ability score modifiers.
+Describes ability scores and maps saves and skills to ability scores.
 """
 # imports
-import math
 from typing import Dict
 
 """
@@ -59,18 +58,3 @@ SKILL_MAP: Dict[str, str] = {
     "Survival": "WIS"
 }
 
-def get_proficiency(level: int) -> int:
-    """
-    Calculate proficiency bonus based on total character level
-    :param level: int, character level (if multiclass, sum of all class levels)
-    :return: int, proficiency bonus
-    """
-    return max(2,math.ceil(level/4)+1)
-
-def get_ability_modifier(score: int) -> int:
-    """
-    Calculates ability score modifier. NOT for skill modifiers.
-    :param score: int, ability score. i.e. "big number"
-    :return: int, ability score modifier i.e. "small number"
-    """
-    return (score-10)//2
