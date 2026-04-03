@@ -1,4 +1,4 @@
-import math
+from math import ceil
 
 def calc_proficiency(level: int) -> int:
     """
@@ -6,7 +6,7 @@ def calc_proficiency(level: int) -> int:
     :param level: int, character level (if multiclass, sum of all class levels)
     :return: int, proficiency bonus
     """
-    return max(2,math.ceil(level/4)+1)
+    return max(2,ceil(level/4)+1)
 
 def calc_ability_modifier(score: int) -> int:
     """
