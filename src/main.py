@@ -1,12 +1,8 @@
 from nicegui import ui
-from ui.pages import home, settings
+from ui.pages import home
 
 @ui.page('/')
 def index():
     home.content()
-
-@ui.page('/settings')
-def setup():
-    settings.content()
 
 ui.run()
