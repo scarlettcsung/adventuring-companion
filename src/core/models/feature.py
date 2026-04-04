@@ -1,6 +1,6 @@
 class Feature:
     def __init__(self,
-                 name:str, desc:list, source:str, level:int = 0,
+                 name:str, desc:list = None, source:str = None, level:int = 0,
                  index: str = None, counter:bool = False):
         """
         Initializing feature attributes
