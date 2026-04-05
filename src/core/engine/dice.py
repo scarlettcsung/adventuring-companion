@@ -2,6 +2,9 @@
 import random
 from typing import Literal
 
+# TODO: Break into smaller modular pieces
+# TODO: Dice should be a tuple property inside other classes/functions etc
+
 # functions
 def roll(number:int = 1, die:int = 20, roll_type: Literal[-1,0,1] = 0):
     """

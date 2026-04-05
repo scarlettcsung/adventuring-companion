@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field, replace
 from enum import Enum
 
-from typing import List
+from typing import List, Tuple
 
 """
 SECTION: Item Types
@@ -92,11 +92,10 @@ class Weapon(Item):
     category: WeaponCategory = WeaponCategory.SIMPLE
     properties: List[str] = field(default_factory=list)
     is_equipped: bool = False
-    dice_count: int = 1
-    dice_sides: int = 6
+    dice: Tuple[int,int] = (1, 20)
     @property
     def damage_str(self):
-        return f"{self.dice_count}d{self.dice_sides}"
+        return f"{self.dice[0]}d{self.dice[1]}"
 
 @dataclass
 class Shield(Item):
