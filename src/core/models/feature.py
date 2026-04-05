@@ -1,7 +1,10 @@
+from core.models.counter import Counter
+
+
 class Feature:
     def __init__(self,
                  name:str, desc:list = None, source:str = None, level:int = 0,
-                 index: str = None, counter:bool = False):
+                 index: str = None, counter:Counter = None):
         """
         Initializing feature attributes
         :param name: str, feature name
@@ -18,6 +21,7 @@ class Feature:
         self.source = source
         self.desc = desc
         self.index = index or name.lower().replace(" ","-")
+        self.counter = counter
 
 
     def __repr__(self):
