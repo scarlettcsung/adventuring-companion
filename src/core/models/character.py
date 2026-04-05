@@ -41,3 +41,4 @@ class Character:
     def level_up(self, char_class):
         current_level, is_base = self.classes.get(char_class, (0, False))
         self.classes[char_class] = (current_level + 1, is_base)
+        self.stats.classes[char_class] = (current_level + 1, is_base)
