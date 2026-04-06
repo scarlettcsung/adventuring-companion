@@ -1,29 +1,19 @@
+from dataclasses import dataclass, field
+from typing import List, Optional
 from core.models.counter import Counter
 
-
+@dataclass
 class Feature:
-    def __init__(self,
-                 name:str, desc:list = None, source:str = None, level:int = 0,
-                 index: str = None, counter:Counter = None):
-        """
-        Initializing feature attributes
-        :param name: str, feature name
-        :param desc: list(str), feature description. One line per item.
-        :param source: str, where the feature comes from. like race, class etc.
-        :param level: str, Class-level associated with feature. Defaults 0 for features not tied to levels
-        :param index: str, "ID" for feature
-        """
-        if not (0 <= level <= 20):
+    name: str
+    desc: List[str] = field(default_factory=list)
+    source: Optional[str] = None
+    level: int = 0 # Level = 0 if no level
+    index: str = field(default=None)
+    counter: Optional[Counter] = None
+
+    def __post_init__(self):
+        if not (0 <= self.level <= 20):
             raise ValueError("Level must be between 0 and 20")
 
-        self.name = name
-        self.level = level
-        self.source = source
-        self.desc = desc
-        self.index = index or name.lower().replace(" ","-")
-        self.counter = counter
-
-
-    def __repr__(self):
-        return f"Feature(name='{self.name}', index='{self.index}')"
-
+        if self.index is None:
+            self.index = self.name.lower().replace(" ", "-")
