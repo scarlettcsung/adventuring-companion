@@ -1,4 +1,4 @@
 from nicegui import ui
 
 def content():
-    ui.label('This is the Home Screen').classes('text-h4')
+    ui.label('Adventuring Companion').classes('text-h4')
