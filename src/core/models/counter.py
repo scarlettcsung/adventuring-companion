@@ -6,10 +6,14 @@ class ResetType(Enum):
     LONG = auto()
     DAILY = auto()
 
+
 class Counter:
-    def __init__(self, maximum:int, reset_type:ResetType = ResetType.NONE, start_full:bool = True):
+    def __init__(self, maximum:int,
+                 reset_type:ResetType = ResetType.NONE, max_type:dict = None,
+                 start_full:bool = True):
         self.maximum = maximum
         self.reset_type = reset_type
+        self.max_type = max_type
         self.start_full = start_full
         self.current = maximum if start_full else 0
 

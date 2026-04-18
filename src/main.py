@@ -1,5 +1,5 @@
 from nicegui import ui
-from ui.pages import home
+from ui.pages import home, features
 from ui.components.bottom_tabs import bottom_tabs
 
 @ui.page('/')

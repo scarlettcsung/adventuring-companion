@@ -14,3 +14,6 @@ def perform_reset(features, rest_type):
             f.tracker.reset()
 
     # TODO: Add spell slot reset logic when spell slots are done
+
+def calculate_max_count(character,feature):
+    counter_type = feature.counter.max_type
