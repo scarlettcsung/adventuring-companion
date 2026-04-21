@@ -2,12 +2,13 @@ from dataclasses import dataclass, field
 from typing import List, Optional
 from core.models.counter import Counter
 
+
 @dataclass
 class Feature:
     name: str
     desc: List[str] = field(default_factory=list)
     source: Optional[str] = None
-    level: int = 0 # Level = 0 if no level
+    level: Optional[int] = 0 # Level = 0 if no level
     index: str = field(default=None)
     counter: Optional[Counter] = None
 
@@ -17,3 +18,5 @@ class Feature:
 
         if self.index is None:
             self.index = self.name.lower().replace(" ", "-")
+
+

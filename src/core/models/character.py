@@ -5,7 +5,8 @@ from core.models.stats import Stats
 
 class Character:
     def __init__(self,
-                 name:str,classes:dict,stats:Stats = None,
+                 name:str,
+                 classes:dict = None,stats:Stats = None,
                  features:list = None,spells:list = None,
                  inventory:Inventory = None,
                  index:str = None):
@@ -23,17 +24,7 @@ class Character:
         """
 
         self.name = name
-        self.classes = classes
-        self.base_class = None
-        self.subclasses = {}
-
-        for char_class, (lvl, subclass, is_base) in classes.items():
-            if is_base:
-                self.base_class = char_class
-
-            if subclass:
-                self.subclasses[char_class] = subclass
-
+        self.classes = classes if classes is not None else {}
         self.stats = stats
         self.features = features if features is not None else []
         self.spells = spells if spells is not None else []
@@ -44,6 +35,17 @@ class Character:
         return f"Character(name='{self.name}', index='{self.index}')"
 
     @property
+    def base_class(self):
+        for name, (lvl, subclass, is_base) in self.classes.items():
+            if is_base:
+                return name
+        return None
+
+    @property
+    def subclasses(self):
+        return {name: subclass for name, (lvl, subclass, is_base) in self.classes.items() if subclass}
+
+    @property
     def level(self):
         return sum(lvl for lvl, subclass, is_base in self.classes.values())
 
@@ -51,7 +53,5 @@ class Character:
         current_lvl, subclass, is_base = self.classes.get(char_class, (0, None, False))
         final_subclass = new_subclass or subclass
         self.classes[char_class] = (current_lvl + 1, final_subclass, is_base)
-        if final_subclass:
-            self.subclasses[char_class] = final_subclass
         if self.stats:
             self.stats.classes[char_class] = (current_lvl + 1, final_subclass, is_base)

@@ -8,14 +8,18 @@ class ResetType(Enum):
 
 
 class Counter:
-    def __init__(self, maximum:int,
+    def __init__(self, maximum:int, current: int = None,
                  reset_type:ResetType = ResetType.NONE, max_type:dict = None,
                  start_full:bool = True):
         self.maximum = maximum
         self.reset_type = reset_type
         self.max_type = max_type
         self.start_full = start_full
-        self.current = maximum if start_full else 0
+
+        if current is None:
+            self.current = maximum if start_full else 0
+        else:
+            self.current = current
 
     def plus_current(self):
         self.current = min(self.maximum,self.current + 1)
