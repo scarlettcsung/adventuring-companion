@@ -1,11 +1,13 @@
 ### Priority
 - [ ] Load and save character -- home
 
-### Next Stage
+### Planned
 - [ ] Features tracker
-- [ ] Feature counter
+- [x] Feature counter
+- [ ] Feature dice counter
 - [ ] Rest resets
 - [ ] Spells
+- [ ] Make UI less generic/better looking
 
 ### Ideas
 - [ ] Active spell/concentration/exhaustion tracker

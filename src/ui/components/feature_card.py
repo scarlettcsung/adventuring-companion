@@ -26,8 +26,8 @@ def feature_card(f: Feature):
                 with ui.row().classes('items-center gap-4'):
                     # Max Display
                     with ui.row().classes('items-center gap-1'):
-                        ui.label('MAX').classes('text-[10px] font-bold text-gray-400')
-                        ui.label(str(f.counter.maximum)).classes('font-mono font-bold')
+                        ui.label('MAXIMUM').classes('text-[10px] font-bold text-gray-400')
+                        ui.label(str(int(f.counter.maximum))).classes('font-mono font-bold')
 
                     # Current Display
                     with ui.row().classes('items-center gap-1'):
@@ -36,10 +36,19 @@ def feature_card(f: Feature):
                         ui.label().bind_text_from(f.counter, 'current'). \
                             classes('font-mono font-bold text-blue-600')
 
-                # Quick Action Buttons (Optional but handy)
                 with ui.row().classes('gap-1'):
                     ui.button(icon='remove', on_click=f.counter.minus_current).props('flat round dense')
                     ui.button(icon='add', on_click=f.counter.plus_current).props('flat round dense')
+
+        if f.dice:
+            n, die = f.dice.to_tuple()
+            dice_string = f'{n}d{die}'
+            with ui.row().classes('w-full items-center justify-between bg-slate-50 p-2 rounded'):
+                with ui.row().classes('items-center gap-4'):
+                    with ui.row().classes('items-center gap-1'):
+                        ui.label('DICE').classes('text-[10px] font-bold text-gray-400')
+                        ui.label(dice_string).classes('font-mono font-bold')
+
 
         # Description Section
         if f.desc:

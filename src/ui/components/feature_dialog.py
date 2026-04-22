@@ -1,6 +1,7 @@
 from nicegui import ui
 
 from core.models.counter import Counter, ResetType
+from core.models.dice import Dice
 from core.models.feature import Feature
 from state import current_char
 
@@ -16,12 +17,15 @@ class FeatureDialog(ui.dialog):
         super().__init__()
         self.on_success = on_success
         self.data = {
-            'name': '', 'source': '', 'counter_enabled': False,
-            'max_count_type': '', 'max_val': 0,
-            'reset_value': '', 'reset_at': '', 'desc': ''
+            'name': '', 'source': '',
+            'counter_enabled': False, 'dice_enabled': False,
+            # TODO: add counter vars
+            # TODO: add dice vars
+            'reset_at': ResetType.NONE,
+            'desc': ''
         }
 
-        with self, ui.card().classes('w-[500px] p-6') as self.card:
+        with self, ui.card().classes('w-[550px] p-6') as self.card:
             self.show_choice_view()
 
     def show_choice_view(self):
@@ -51,11 +55,15 @@ class FeatureDialog(ui.dialog):
                 ui.input('Name', on_change=lambda e: self.update_feature('name', e.value))
                 ui.select(['Custom'], label='Source',
                           on_change=lambda e: self.update_feature('source', e.value)).classes('w-32')
+            with ui.row().classes('items-center'):
                 counter_switch = ui.switch('Counter',
                                            on_change=lambda e: self.update_feature('counter_enabled', e.value))
+                dice_switch = ui.switch('Dice',
+                                       on_change=lambda e: self.update_feature('dice_enabled', e.value))
 
             # Conditional section using bind_visibility
             with ui.column().bind_visibility_from(counter_switch, 'value'):
+                ui.label('Counter').classes('text-l font-bold')
                 with ui.row().classes('items-center'):
                     max_count = ui.select(['Custom'], label='Maximum Count',
                                           on_change=lambda e: self.update_feature('max_count_type', e.value)).classes(
@@ -70,6 +78,14 @@ class FeatureDialog(ui.dialog):
                               on_change=lambda e: self.update_feature('reset_value', e.value)).classes('w-40')
                     ui.select(['Short Rest', 'Long Rest', 'Dawn', 'No Reset'], label='Reset at',
                               on_change=lambda e: self.update_feature('reset_at', e.value)).classes('w-40')
+
+            with ui.column().bind_visibility_from(dice_switch, 'value'):
+                ui.label('Dice').classes('text-l font-bold')
+                with ui.row().classes('items-center'):
+                    ui.number('#', on_change=lambda e: self.update_feature('n_die', e.value)).classes('w-20')
+                    ui.select(['4','6','8','10','12','20','100'],
+                              on_change=lambda e: self.update_feature('die_type', e.value)).classes('w-20')
+
 
             ui.textarea(label='Description', placeholder='Enter feature description here...',
                         on_change=lambda e: self.update_feature('desc', e.value)) \
@@ -97,10 +113,17 @@ class FeatureDialog(ui.dialog):
                 start_full=(self.data['reset_value'] == 'Max')
             )
 
+        dice = None
+        if self.data['dice_enabled']:
+            n = int(self.data.get('n_die',1))
+            die = int(self.data.get('die_type',20))
+            dice = Dice(n=n, die_type = die)
+
         feature = Feature(
             name = name,
             desc = lines,
-            counter = counter
+            counter = counter,
+            dice = dice
         )
         current_char.features.append(feature)
 
