@@ -19,9 +19,9 @@ class FeatureDialog(ui.dialog):
         self.data = {
             'name': '', 'source': '',
             'counter_enabled': False, 'dice_enabled': False,
-            # TODO: add counter vars
-            # TODO: add dice vars
-            'reset_at': ResetType.NONE,
+            'max_count': 0, 'reset_value':None,
+            'n_die':None,'die_type':None,
+            'reset_at': 'No Reset',
             'desc': ''
         }
 
@@ -115,8 +115,8 @@ class FeatureDialog(ui.dialog):
 
         dice = None
         if self.data['dice_enabled']:
-            n = int(self.data.get('n_die',1))
-            die = int(self.data.get('die_type',20))
+            n = int(self.data.get('n_die')or 1)
+            die = int(self.data.get('die_type') or 20)
             dice = Dice(n=n, die_type = die)
 
         feature = Feature(

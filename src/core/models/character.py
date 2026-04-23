@@ -55,3 +55,7 @@ class Character:
         self.classes[char_class] = (current_lvl + 1, final_subclass, is_base)
         if self.stats:
             self.stats.classes[char_class] = (current_lvl + 1, final_subclass, is_base)
+
+    def remove_feature(self, feature_name:str):
+        self.features[:] = [f for f in self.features if f.name != feature_name]
+

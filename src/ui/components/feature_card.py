@@ -20,34 +20,33 @@ def feature_card(f: Feature):
 
         ui.separator()
 
-        # Counter Section
-        if f.counter:
-            with ui.row().classes('w-full items-center justify-between bg-slate-50 p-2 rounded'):
-                with ui.row().classes('items-center gap-4'):
-                    # Max Display
-                    with ui.row().classes('items-center gap-1'):
-                        ui.label('MAXIMUM').classes('text-[10px] font-bold text-gray-400')
-                        ui.label(str(int(f.counter.maximum))).classes('font-mono font-bold')
+        # Combined Counter & Dice Row
+        if f.counter or f.dice:
+            with ui.row().classes('w-full gap-2 justify-start'):
 
-                    # Current Display
-                    with ui.row().classes('items-center gap-1'):
-                        ui.label('CURRENT').classes('text-[10px] font-bold text-gray-400')
-                        # Replace your current label with this:
-                        ui.label().bind_text_from(f.counter, 'current'). \
-                            classes('font-mono font-bold text-blue-600')
+                # Counter Section
+                if f.counter:
+                    with ui.row().classes('items-center gap-3 bg-slate-50 p-2 rounded border'):
+                        with ui.row().classes('items-center gap-3'):
+                            with ui.row().classes('items-center gap-1'):
+                                ui.label('MAX').classes('text-[10px] font-bold text-gray-400')
+                                ui.label(str(int(f.counter.maximum))).classes('font-mono font-bold')
+                            with ui.row().classes('items-center gap-1'):
+                                ui.label('CURRENT').classes('text-[10px] font-bold text-gray-400')
+                                ui.label().bind_text_from(f.counter, 'current').classes(
+                                    'font-mono font-bold text-blue-600')
 
-                with ui.row().classes('gap-1'):
-                    ui.button(icon='remove', on_click=f.counter.minus_current).props('flat round dense')
-                    ui.button(icon='add', on_click=f.counter.plus_current).props('flat round dense')
+                        with ui.row().classes('gap-0 ml-2'):
+                            ui.button(icon='remove', on_click=f.counter.minus_current).props('flat round dense size=sm')
+                            ui.button(icon='add', on_click=f.counter.plus_current).props('flat round dense size=sm')
 
-        if f.dice:
-            n, die = f.dice.to_tuple()
-            dice_string = f'{n}d{die}'
-            with ui.row().classes('w-full items-center justify-between bg-slate-50 p-2 rounded'):
-                with ui.row().classes('items-center gap-4'):
-                    with ui.row().classes('items-center gap-1'):
-                        ui.label('DICE').classes('text-[10px] font-bold text-gray-400')
-                        ui.label(dice_string).classes('font-mono font-bold')
+                # Dice Section
+                if f.dice:
+                    n, die = f.dice.to_tuple()
+                    with ui.row().classes('items-center gap-2 bg-slate-50 p-2 rounded border'):
+                        with ui.row().classes('items-center gap-1'):
+                            ui.label('DICE').classes('text-[10px] font-bold text-gray-400')
+                            ui.label(f'{n}d{die}').classes('font-mono font-bold')
 
 
         # Description Section
