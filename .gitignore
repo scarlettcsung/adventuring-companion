@@ -212,3 +212,10 @@ __marimo__/
 
 # Notes
 /notes/
+
+saves/**/*
+!.gitkeep
+
+!content/**/srd_*
+!saves/**/srd_*
+
