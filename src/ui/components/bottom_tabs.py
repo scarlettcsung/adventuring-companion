@@ -11,6 +11,6 @@ def bottom_tabs():
             ui.tab('Spellbook', icon='auto_stories').on('click', lambda: ui.navigate.to('/spellbook'))
             ui.tab('Inventory', icon='backpack').on('click', lambda: ui.navigate.to('/inventory'))
             ui.tab('Notes', icon='notes').on('click', lambda: ui.navigate.to('/notes'))
-            ui.tab('Levelling', icon='upgrade').on('click', lambda: ui.navigate.to('/levelling'))
+            ui.tab('Levelling', icon='table_rows').on('click', lambda: ui.navigate.to('/levelling'))
 
     return tabs

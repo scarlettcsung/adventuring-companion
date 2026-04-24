@@ -207,12 +207,8 @@ marimo/_lsp/
 __marimo__/
 
 # Raw data processing
-data/raw/
+/data/
 /er.email 85265936+scarlettcsung@users.noreply.github.com
-
-# Character folder
-data/saved-characters/*
-!data/saved-characters/.gitkeep
 
 # Notes
 /notes/
