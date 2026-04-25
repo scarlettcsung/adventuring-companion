@@ -3,7 +3,7 @@ from nicegui import ui
 from core.models.counter import Counter, ResetType
 from core.models.dice import Dice
 from core.models.feature import Feature
-from state import current_char
+import state
 
 RESET_MAP = {
     'Short Rest': ResetType.SHORT,
@@ -125,7 +125,7 @@ class FeatureDialog(ui.dialog):
             counter = counter,
             dice = dice
         )
-        current_char.features.append(feature)
+        state.current_char.features.append(feature)
 
         if self.on_success:
             self.on_success()

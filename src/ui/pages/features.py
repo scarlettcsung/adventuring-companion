@@ -1,13 +1,16 @@
 from nicegui import ui
 
-from state import current_char
+import state
 from ui.components.feature_card import feature_card
 from ui.components.feature_dialog import FeatureDialog
 from ui.components.bottom_tabs import bottom_tabs
+from ui.components.global_header import global_header
+
 
 @ui.page('/features')
 def content():
 
+    global_header()
     with ui.column().classes('w-full max-w-2xl ml-8 p-4 p-24'):
         ui.label('Features').classes('text-2xl mb-4 font-bold')
         container = ui.column().classes('w-full')
@@ -15,10 +18,10 @@ def content():
         def refresh():
             container.clear()
             with container:
-                if not current_char.features:
+                if not state.current_char.features:
                     ui.label('No features yet.').classes('text-gray-400 italic mt-4')
                 else:
-                    for feature in current_char.features:
+                    for feature in state.current_char.features:
                         feature_card(feature)
 
         refresh()

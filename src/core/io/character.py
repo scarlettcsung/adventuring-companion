@@ -2,8 +2,9 @@ import pathlib
 
 from core.models.character import Character
 import jsonpickle
+import json
 
-PROJECT_ROOT = pathlib.Path(__file__).resolve().parent.parent.parent
+PROJECT_ROOT = pathlib.Path(__file__).resolve().parent.parent.parent.parent
 SAVE_DIR = PROJECT_ROOT / 'saves' / 'character'
 
 def save_character(character:Character):
@@ -35,3 +36,39 @@ def load_character(character_index: str) -> Character:
     character = jsonpickle.decode(encoded_data)
 
     return character
+
+
+def loadable_characters():
+    characters_map = {}
+
+    if not SAVE_DIR.exists():
+        return {}
+
+    for file_path in SAVE_DIR.glob('*.json'):
+        try:
+            with open(file_path, 'r', encoding='utf-8') as f:
+                raw_data = json.load(f)
+
+                char_name = raw_data.get('name', 'Unknown Hero')
+                characters_map[char_name] = file_path.stem
+
+        except (json.JSONDecodeError, IOError):
+            continue
+
+    return characters_map
+
+def delete_character(index : str):
+    """
+        Deletes a character's json save file.
+        :param index: The filename stem (index) of the character.
+        """
+    file_path = SAVE_DIR / f"{index}.json"
+
+    if file_path.exists():
+        try:
+            file_path.unlink()
+            print(f"Deleted character file: {file_path}")
+        except Exception as e:
+            raise IOError(f"Could not delete {index}: {e}")
+    else:
+        raise FileNotFoundError(f"No save file found for index: {index}")

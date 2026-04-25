@@ -37,7 +37,7 @@ class CreatorChoiceDialog(ui.dialog):
             ui.label('Create New Character').classes('text-xl font-bold mt-2')
 
             with ui.row().classes('items-center'):
-                ui.input('Name').bind_value(self.data, 'name')
+                ui.input('Name', on_change=lambda e: self.update_data('name', e.value))
 
             # Action buttons
             with ui.row().classes('w-full justify-end mt-4'):
@@ -49,7 +49,8 @@ class CreatorChoiceDialog(ui.dialog):
         print(f"Current State: {self.data}")
 
     def save_data(self):
-        name = self.data['name'] or 'New Adventurer'
+        raw_name = self.data.get('name','').strip()
+        name = raw_name if raw_name else 'New Adventurer'
         state.current_char = Character(name = name)
 
         if self.on_success:
