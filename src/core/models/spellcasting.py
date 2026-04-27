@@ -8,6 +8,7 @@ class SpellPrepType(Enum):
     PREPARED = 1
     KNOWN = 2
 
+
 class SpellSource:
     """A small container for different sources of magic."""
     def __init__(self, name: str, ability: str, prep_type:SpellPrepType = SpellPrepType.KNOWN):
@@ -28,6 +29,10 @@ class SpellCasting:
                 self.subclasses[char_class] = subclass
 
         self.sources = {}
+        self.spellslots = {}
+
+    def set_spellslot(self, spell_level:int, spellslots: int):
+        self.spellslots[spell_level] = spellslots
 
     def add_source(self, name: str, ability: str, prep_type: SpellPrepType = SpellPrepType.KNOWN):
         name_key = name.lower().replace(" ", "-")

@@ -15,8 +15,10 @@ def global_header():
             ui.button('Delete', color='red',
                       on_click=lambda: execute_delete(state.current_char.index, delete_dialog))
 
-    with ui.header().classes('bg-white text-slate-900 border-b justify-end items-center py-2'):
+    with ui.header().classes('bg-white text-slate-900 border-b items-center py-2'):
+        ui.label('Adventuring Companion').classes('text-2xl font-bold tracking-tight px-4')
 
+        ui.space()
         # The Menu Button
         with ui.button(icon='more_vert').props('flat round color=slate-600'):
             with ui.menu().classes('w-48'):

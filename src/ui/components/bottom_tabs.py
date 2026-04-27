@@ -18,5 +18,7 @@ def bottom_tabs():
                 .on('click', lambda: ui.navigate.to('/notes'))
             ui.tab('Levelling', icon='table_rows').classes('text-sky-300') \
                 .on('click', lambda: ui.navigate.to('/levelling'))
+            ui.tab('Brewery', icon='sports_bar').classes('text-sky-300') \
+                .on('click', lambda: ui.navigate.to('/brewery'))
 
     return tabs

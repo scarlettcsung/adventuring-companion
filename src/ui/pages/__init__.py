@@ -1,1 +1,4 @@
-__all__ = ['home', 'combat', 'inventory', 'features', 'stats', 'combat','levelling','notes','overview','spellbook',]
+__all__ = ['home', 'combat', 'inventory',
+           'features', 'stats', 'combat',
+           'levelling','notes','overview',
+           'spellbook','brewery']
