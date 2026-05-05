@@ -19,6 +19,10 @@ def global_header():
         ui.label('Adventuring Companion').classes('text-2xl font-bold tracking-tight px-4')
 
         ui.space()
+        ui.button(icon='save', on_click=perform_save) \
+            .props('flat round color=primary') \
+            .tooltip('Save Character (Ctrl+S)')
+
         # The Menu Button
         with ui.button(icon='more_vert').props('flat round color=slate-600'):
             with ui.menu().classes('w-48'):
@@ -53,7 +57,7 @@ def global_header():
                 with ui.menu_item(on_click= delete_dialog.open):
                     with ui.row().classes('items-center gap-2 text-red-500'):
                         ui.icon('delete', size='sm')
-                        ui.label('Delete')
+                        ui.label('Delete Character')
 
 
 def perform_save():
