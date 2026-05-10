@@ -9,7 +9,7 @@ class SpellDialog(ui.dialog):
         self.on_success = on_success
         # Default state
         self.data = {
-            'name': '', 'level': 0, 'school': 'Evocation',
+            'name': '', 'classes': [], 'level': 0, 'school': 'Evocation',
             'cast_time': '1 Action', 'range': '60 ft', 'duration': 'Instantaneous',
             'desc': '', 'components': [], 'is_ritual': False,
             'is_concentration': False, 'damage_dice': None, 'damage_type': None
@@ -41,6 +41,12 @@ class SpellDialog(ui.dialog):
             # --- Basic Info Row ---
             with ui.row().classes('w-full items-center'):
                 ui.input('Name', on_change=lambda e: self.update_data('name', e.value)).classes('flex-grow')
+                ui.select(
+                    options=['Bard', 'Cleric', 'Druid', 'Paladin', 'Sorcerer', 'Warlock', 'Wizard'],
+                    label='Classes',
+                    multiple=True,
+                    on_change=lambda e: self.update_data('classes', e.value)
+                ).props('use-chips').classes('flex-grow')
                 ui.number('Level', value=0, min=0, max=9, format='%d',
                           on_change=lambda e: self.update_data('level', int(e.value))).classes('w-16')
 
@@ -105,6 +111,7 @@ class SpellDialog(ui.dialog):
         # Create instance of Spell dataclass
         new_spell = Spell(
             name=self.data['name'] or 'New Spell',
+            classes=self.data['classes'],
             level=self.data['level'],
             school=self.data['school'],
             cast_time=self.data['cast_time'],
@@ -114,8 +121,8 @@ class SpellDialog(ui.dialog):
             components=self.data['components'],
             is_ritual=self.data['is_ritual'],
             is_concentration=self.data['is_concentration'],
-            damage_dice=self.data['damage_dice'] if self.data['damage_dice'] else None,
-            damage_type=self.data['damage_type'] if self.data['damage_type'] else None
+            damage_dice={ "1": self.data['damage_dice'] } if self.data['damage_dice'] else None,
+            damage_type=[self.data['damage_type']] if self.data['damage_type'] else None
         )
 
         # Append to character state

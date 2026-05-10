@@ -5,6 +5,7 @@ from typing import List, Optional, Dict, Any
 @dataclass
 class Spell:
     name: str
+    classes: List[str]
     level: int
     school: str
     cast_time: str
@@ -14,8 +15,8 @@ class Spell:
     components: List[str]
     is_ritual: bool = False
     is_concentration: bool = False
-    damage_dice: Optional[str] = None  # e.g., "4d4"
-    damage_type: Optional[str] = None  # e.g., "Acid"
+    damage_dice: Optional[Dict[str, str]] = None  # e.g., "4d4"
+    damage_type: Optional[List[str]] = None  # e.g., "Acid"
 
     @classmethod
     def from_json(cls, data: Dict[str, Any]):
