@@ -14,8 +14,8 @@ def bottom_tabs():
                 .on('click', lambda: ui.navigate.to('/spellbook'))
             ui.tab('Inventory', icon='backpack').classes('text-sky-300') \
                 .on('click', lambda: ui.navigate.to('/inventory'))
-            ui.tab('Notes', icon='notes').classes('text-sky-300') \
-                .on('click', lambda: ui.navigate.to('/notes'))
+            ui.tab('Notebook', icon='book').classes('text-sky-300') \
+                .on('click', lambda: ui.navigate.to('/notebook'))
             ui.tab('Levelling', icon='table_rows').classes('text-sky-300') \
                 .on('click', lambda: ui.navigate.to('/levelling'))
             ui.tab('Brewery', icon='sports_bar').classes('text-sky-300') \

@@ -1,4 +1,4 @@
 __all__ = ['home', 'combat', 'inventory',
            'features', 'stats', 'combat',
-           'levelling','notes','overview',
+           'levelling', 'notebook', 'overview',
            'spellbook','brewery']

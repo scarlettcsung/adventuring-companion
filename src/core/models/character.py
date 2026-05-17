@@ -1,4 +1,5 @@
 from core.models.inventory import Inventory
+from core.models.notebook import Notebook
 from core.models.stats import Stats
 
 # TODO: add calculate logic for inputs
@@ -9,6 +10,7 @@ class Character:
                  classes:dict = None,stats:Stats = None,
                  features:list = None,spells:list = None,
                  inventory:Inventory = None,
+                 notebook:Notebook = None,
                  index:str = None):
         """
         Initializing character attributes.
@@ -28,7 +30,8 @@ class Character:
         self.stats = stats
         self.features = features if features is not None else []
         self.spells = spells if spells is not None else []
-        self.inventory = inventory
+        self.inventory = inventory if inventory is not None else Inventory()
+        self.notebook = notebook if notebook is not None else Notebook()
         self.index = index or name.lower().replace(" ", "-")
 
     def __repr__(self):
