@@ -1,9 +1,20 @@
 # Adventuring Companion
 ## Introduction
-The Adventuring Companion is a tool built to make resource tracking and stats referencing easier at your D&D table. This is in the very early stages of development, you may see what is available below.
+The Adventuring Companion is a tool built to make resource tracking and stats referencing easier at your D&D table. 
+This is in the very early stages of development, you may see what is available below.
 
 ## Features
 - Feature tracking: counter to track the number of uses you have for a feature
+
+## Usage
+To run the project locally, clone the project, navigate into the project directory and run the following in the terminal 
+after setting up your virtual environment.  
+`pip install -r requirements.txt`  
+`python3 src/main`  
+
+You may also access the latest version here: https://adventuring-companion.onrender.com/  
+**NOTE**: At the moment, characters cannot be created or stored in the above link. You may still access the features for 
+an unnamed character, but the character cannot be saved. This is only meant to serve as a limited demo of the project.
 
 ## Acknowledgements and License
 - Database will be built from files compiled by contributors of the [5e-database](https://github.com/5e-bits/5e-database). 
