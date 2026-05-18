@@ -1,4 +1,5 @@
 from nicegui import app,ui
+import os
 
 from ui.pages import *
 from ui.components.bottom_tabs import bottom_tabs
@@ -10,4 +11,6 @@ def index():
 
 app.add_static_files('/static', 'static')
 
-ui.run()
+port = int(os.environ.get("PORT", 8080))
+
+ui.run(host="0.0.0.0", port=port, reload=False)
