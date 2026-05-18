@@ -9,7 +9,10 @@ def index():
     home.content()
     bottom_tabs()
 
-app.add_static_files('/static', 'static')
+current_dir = os.path.dirname(os.path.abspath(__file__))
+static_dir = os.path.join(current_dir, 'static')
+
+app.add_static_files('/static', static_dir)
 
 port = int(os.environ.get("PORT", 8080))
 
