@@ -107,12 +107,13 @@ class Shield(Item):
 INVENTORY CLASS
 """
 class Inventory:
-    def __init__(self, items:list = None):
+    def __init__(self, items:list = None, wallet: Currency = None):
         """
         Initializing Inventory attributes.
         :param items: list of Item objects containing all imported items of character.
         """
         self.items = items if items is not None else []
+        self.wallet = wallet if wallet is not None else Currency()
 
     def __repr__(self):
         if not self.items:

@@ -82,7 +82,7 @@ class SpellDialog(ui.dialog):
             dmg_switch = ui.switch('Has Damage/Healing')
 
             with ui.row().classes('w-full items-center').bind_visibility_from(dmg_switch, 'value'):
-                ui.input('Damage Dice (e.g. 1d8)',
+                ui.input('Dice (e.g. 1d8)',
                          on_change=lambda e: self.update_data('damage_dice', e.value)).classes('flex-1')
                 ui.select(['Slashing', 'Piercing', 'Bludgeoning', 'Acid', 'Cold', 'Fire',
                            'Force', 'Lightning', 'Necrotic', 'Poison', 'Psychic',

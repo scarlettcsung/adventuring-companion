@@ -1,6 +1,7 @@
 from nicegui import ui
 from ui.components.bottom_tabs import bottom_tabs
 from ui.components.global_header import global_header
+from ui.components.wallet_calculator import *
 from core.models.inventory import Item, Armor, Weapon, Shield
 import state
 
@@ -12,7 +13,7 @@ def content():
     # Data setup
     char = getattr(state, 'current_char', None)
     inv = getattr(char, 'inventory', None) if char else None
-    wallet = getattr(char, 'currency', None) if char else None
+    wallet = inv.wallet if inv else None
 
     # Main Container
     with ui.column().classes('w-full p-4 max-w-4xl ml-4 mb-24 gap-6'):
@@ -34,7 +35,13 @@ def content():
 
         # --- 2. Coins Section ---
         with ui.column().classes('w-full gap-2'):
-            ui.label('Currency').classes('text-h6 text-primary')
+            with ui.row().classes('w-full justify-between items-center'):
+                ui.label('Currency').classes('text-h6 text-primary')
+                # Global +/- buttons
+                with ui.row().classes('gap-1'):
+                    ui.button(icon='remove', on_click=lambda: wallet_dialog(on_submit=spend_curr)).props('flat dense')
+                    ui.button(icon='add', on_click=lambda: wallet_dialog(on_submit=add_curr)).props('flat dense')
+
             with ui.card().classes('w-full bg-slate-50 ml-0 shadow-sm'):
                 with ui.row().classes('w-full justify-around p-2'):
                     units = ['pp', 'gp', 'ep', 'sp', 'cp']
@@ -42,11 +49,7 @@ def content():
                         val = getattr(wallet, unit, 0) if wallet else 0
                         with ui.column().classes('items-center'):
                             ui.label(unit.upper()).classes('text-xs font-bold text-gray-500')
-                            n = ui.number(value=val, format='%d').classes('w-16').props('dense borderless')
-                            if wallet:
-                                n.on_change(lambda e, u=unit: setattr(wallet, u, int(e.value)))
-                            else:
-                                n.disable()
+                            ui.number(value=val, format='%d').classes('w-16').props('dense borderless readonly')
 
         # --- 3. Equipment & Weapons Section ---
         with ui.column().classes('w-full gap-2'):
