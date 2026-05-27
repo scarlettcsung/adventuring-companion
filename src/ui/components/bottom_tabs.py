@@ -10,10 +10,8 @@ def bottom_tabs():
             ui.tab('Features', icon='interests').on('click', lambda: ui.navigate.to('/features'))
             ui.tab('Combat', icon='sports_mma').classes('text-sky-300') \
                 .on('click', lambda: ui.navigate.to('/combat'))
-            ui.tab('Spellbook', icon='auto_stories').classes('text-sky-300') \
-                .on('click', lambda: ui.navigate.to('/spellbook'))
-            ui.tab('Inventory', icon='backpack').classes('text-sky-300') \
-                .on('click', lambda: ui.navigate.to('/inventory'))
+            ui.tab('Spellbook', icon='auto_stories').on('click', lambda: ui.navigate.to('/spellbook'))
+            ui.tab('Inventory', icon='backpack').on('click', lambda: ui.navigate.to('/inventory'))
             ui.tab('Notebook', icon='book').classes('text-sky-300') \
                 .on('click', lambda: ui.navigate.to('/notebook'))
             ui.tab('Levelling', icon='table_rows').classes('text-sky-300') \
