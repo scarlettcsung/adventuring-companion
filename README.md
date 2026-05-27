@@ -15,8 +15,7 @@ after setting up your virtual environment.
 `python3 src/main`  
 
 You may also access the latest version here: https://adventuring-companion.onrender.com/  
-**NOTE**: At the moment, characters cannot be created or stored in the above link. You may still access the features for 
-an unnamed character, but the character cannot be saved. This is only meant to serve as a limited demo of the project.
+**NOTE**: At the moment, some features will not work with the above link, due to the lack of file storage with Render. This is only meant to serve as a limited demo of the project.
 
 ## Acknowledgements and License
 - Database will be built from files compiled by contributors of the [5e-database](https://github.com/5e-bits/5e-database). 
