@@ -4,7 +4,9 @@ The Adventuring Companion is a tool built to make resource tracking and stats re
 This is in the very early stages of development, you may see what is available below.
 
 ## Features
-- Feature tracking: counter to track the number of uses you have for a feature
+- Feature tracking: feature cards and counter to track the number of uses you have for a feature
+- Spell tracking: spell cards and spell slot counter to track spell use
+- Wallet: add and remove currency with ease, automatically recalculates after currency spending
 
 ## Usage
 To run the project locally, clone the project, navigate into the project directory and run the following in the terminal 
