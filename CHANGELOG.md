@@ -9,6 +9,7 @@ Notable changes to this project will be documented in this file.
 ### Added
 - **Spellbook:** Users may add custom spells and track spell slots
 - **Inventory:** Users may track currency, including a calculator for spending currency
+- **Notebook:** Users may add session notes
 
 ## [0.0.1] - 2026-04-25
 ### Added
