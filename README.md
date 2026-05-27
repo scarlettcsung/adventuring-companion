@@ -7,6 +7,7 @@ This is in the very early stages of development, you may see what is available b
 - Feature tracking: feature cards and counter to track the number of uses you have for a feature
 - Spell tracking: spell cards and spell slot counter to track spell use
 - Wallet: add and remove currency with ease, automatically recalculates after currency spending
+- Notebook: write and save session notes
 
 ## Usage
 To run the project locally, clone the project, navigate into the project directory and run the following in the terminal 
