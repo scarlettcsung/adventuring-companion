@@ -1,7 +1,7 @@
 ### Priority
 - [ ] Rest resets
-- [ ] Spells
 - [ ] Brewery
+- [ ] Inventory -- add items
 
 ### Planned
 - [ ] Make UI less generic/better looking
@@ -15,3 +15,6 @@
 - [x] Load and save character -- home
 - [x] Feature counter
 - [x] Feature dice
+- [x] Spells
+- [x] Notebook
+- [x] Currency
