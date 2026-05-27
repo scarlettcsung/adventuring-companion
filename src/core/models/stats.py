@@ -25,8 +25,8 @@ SECTION: Stats Class
 class Stats:
     def __init__(self,
                  classes:dict, abil_scores:AbilityScores,
-                 armor_class:int, saves:list,proficiencies:list,
-                 initiative:int, hit_die:int,speed:int = 30, pb_override: int = None,
+                 armor_class:int = 10, saves:list = [], proficiencies:list = [],
+                 initiative:int = 0, hit_die:int = 6,speed:int = 30, pb_override: int = None,
                  inventory:Inventory = None):
 
         self.classes = classes

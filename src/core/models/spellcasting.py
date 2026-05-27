@@ -31,8 +31,8 @@ class SpellCasting:
         self.sources = {}
         self.spellslots = {}
 
-    def set_spellslot(self, spell_level:int, spellslots: int):
-        self.spellslots[spell_level] = spellslots
+    def set_spellslot(self, spell_level:int, spellslots: int, remaining:int):
+        self.spellslots[spell_level] = (spellslots,remaining)
 
     def add_source(self, name: str, ability: str, prep_type: SpellPrepType = SpellPrepType.KNOWN):
         name_key = name.lower().replace(" ", "-")

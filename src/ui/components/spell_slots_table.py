@@ -1,9 +1,17 @@
 from nicegui import ui
+import state
 
-
+@ui.refreshable
 def spell_slots_table():
-    # 1. Define rows outside so we can reference the list easily
-    rows = [{'level': f'Level {i}', 'max': 0, 'current': 0} for i in range(1, 10)]
+    # Read from the current character's spellslots dictionary
+    rows = [
+        {
+            'level': f'Level {i}',
+            'max': state.current_char.spellcasting.spellslots.get(i, (0, 0))[0],
+            'current': state.current_char.spellcasting.spellslots.get(i, (0, 0))[1]
+        }
+        for i in range(1, 10)
+    ]
 
     with ui.card().classes('p-0 overflow-hidden'):
         columns = [
@@ -17,12 +25,16 @@ def spell_slots_table():
         table = ui.table(columns=columns, rows=rows).classes('bg-transparent')
 
         table.add_slot('body-cell-current', '''
-            <q-td :props="props">
-                <q-btn flat round size="sm" icon="remove" @click="props.row.current--" :disable="props.row.current <= 0" />
-                <span class="mx-2 text-md">{{ props.row.current }}</span>
-                <q-btn flat round size="sm" icon="add" @click="props.row.current++" :disable="props.row.current >= props.row.max" />
-            </q-td>
-        ''')
+                    <q-td :props="props">
+                        <q-btn flat round size="sm" icon="remove" 
+                               @click="$parent.$emit('change_current', {row: props.row, action: 'decrement'})" 
+                               :disable="props.row.current <= 0" />
+                        <span class="mx-2 text-md">{{ props.row.current }}</span>
+                        <q-btn flat round size="sm" icon="add" 
+                               @click="$parent.$emit('change_current', {row: props.row, action: 'increment'})" 
+                               :disable="props.row.current >= props.row.max" />
+                    </q-td>
+                ''')
 
         table.add_slot('body-cell-edit', '''
             <q-td :props="props">
@@ -33,7 +45,7 @@ def spell_slots_table():
     # Local Edit Dialog logic
     with ui.dialog() as edit_dialog, ui.card().classes('p-4 w-64'):
         ui.label('Edit Max Slots').classes('text-lg font-bold')
-        num_input = ui.number('Max Slots', min=0, precision=0).classes('w-full')
+        num_input = ui.number('Max Slots', min=0, precision=1).classes('w-full')
 
         # We store the index to ensure we target the right row
         context = {'row_index': -1}
@@ -48,6 +60,9 @@ def spell_slots_table():
                     table.rows[idx]['current'] = table.rows[idx]['max']
 
                 table.update()  # Refresh the UI
+                state.current_char.spellcasting.set_spellslot(idx + 1,
+                                                              table.rows[idx]['max'],
+                                                              table.rows[idx]['current'])
             edit_dialog.close()
 
         with ui.row().classes('justify-end w-full mt-2'):
@@ -66,3 +81,31 @@ def spell_slots_table():
         edit_dialog.open()
 
     table.on('edit_max', handle_edit)
+
+    # When the + or - button is clicked
+    def handle_current_change(e):
+        args = e.args
+        row = args['row']
+        action = args['action']
+
+        # Find the row index to modify the correct level
+        for idx, r in enumerate(table.rows):
+            if r['level'] == row['level']:
+                # Update the UI data array
+                if action == 'increment' and r['current'] < r['max']:
+                    r['current'] += 1
+                elif action == 'decrement' and r['current'] > 0:
+                    r['current'] -= 1
+
+                table.update()  # Refresh the UI table
+
+                # Update the backend model using your existing method
+                state.current_char.spellcasting.set_spellslot(
+                    idx + 1,
+                    r['max'],
+                    r['current']
+                )
+                break
+
+    table.on('change_current', handle_current_change)
+

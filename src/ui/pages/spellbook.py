@@ -7,6 +7,8 @@ from ui.components.spells_list import spells_list
 
 @ui.page('/spellbook')
 def content():
+    ui.context.client.on_connect(lambda _: spell_slots_table.refresh())
+
     global_header()
 
     with ui.column().classes('w-full p-4 gap-6'):

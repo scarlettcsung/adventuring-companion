@@ -70,7 +70,7 @@ def content():
             ui.label('No treasure currently held.').classes('text-grey italic ml-2')
 
         # Floating Add Button
-        ui.button(icon='add', on_click=lambda: ui.notify('Add item dialog coming soon!')) \
+        ui.button(icon='add', on_click=lambda: ui.notify('Add Item is under construction.')) \
             .props('round elevated color=primary size=lg') \
             .classes('fixed bottom-24 left-8 z-50')
 

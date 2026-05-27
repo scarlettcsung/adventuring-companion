@@ -35,6 +35,11 @@ def load_character(character_index: str) -> Character:
     encoded_data = file_path.read_text()
     character = jsonpickle.decode(encoded_data)
 
+    if hasattr(character, 'spellcasting') and hasattr(character.spellcasting, 'spellslots'):
+        character.spellcasting.spellslots = {
+            int(k): v for k, v in character.spellcasting.spellslots.items()
+        }
+
     return character
 
 

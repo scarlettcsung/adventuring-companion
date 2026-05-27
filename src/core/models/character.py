@@ -1,6 +1,8 @@
 from core.models.inventory import Inventory
 from core.models.notebook import Notebook
-from core.models.stats import Stats
+from core.models.spellcasting import SpellCasting
+from core.models.stats import Stats, AbilityScores
+
 
 # TODO: add calculate logic for inputs
 
@@ -11,6 +13,7 @@ class Character:
                  features:list = None,spells:list = None,
                  inventory:Inventory = None,
                  notebook:Notebook = None,
+                 spellcasting:SpellCasting = None,
                  index:str = None):
         """
         Initializing character attributes.
@@ -27,11 +30,12 @@ class Character:
 
         self.name = name
         self.classes = classes if classes is not None else {}
-        self.stats = stats
+        self.stats = stats if stats is not None else Stats(self.classes, AbilityScores())
         self.features = features if features is not None else []
         self.spells = spells if spells is not None else []
         self.inventory = inventory if inventory is not None else Inventory()
         self.notebook = notebook if notebook is not None else Notebook()
+        self.spellcasting = spellcasting if spellcasting is not None else SpellCasting(self.classes,self.stats)
         self.index = index or name.lower().replace(" ", "-")
 
     def __repr__(self):
